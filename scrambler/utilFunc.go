@@ -26,10 +26,6 @@ func bitCount(maximum uint32) uint8 {
 	return r
 }
 
-func mod(a int, b uint32) uint32 {
-	return uint32(a % int(b))
-}
-
 func minOne(a uint32) uint32 {
 	var n uint32 = 1
 	if a > n {
@@ -49,7 +45,7 @@ func min(a, b uint32) uint32 {
 	return k
 }
 
-func calcOffset(outOffset int, max uint32) uint32 {
+func wrappingMod(outOffset int, max uint32) uint32 {
 	m := int(max)
 	offset := outOffset % m
 	if offset < 0 {

@@ -36,10 +36,10 @@ func New(opts ConstructorOpts) (*Scrambler, error) {
 	// build scrambler
 	p := Scrambler{
 		opts: opts,
-		start: minOne(mod(opts.Seed, opts.Maximum)),
+		start: wrappingMod(opts.Seed, opts.Maximum) + 1,
 		highestBitMask: 2 << (bc - 2),
 		feedbackMask: getMask(bc),
-		outOffset: calcOffset(opts.OutOffset, opts.Maximum),
+		outOffset: wrappingMod(opts.OutOffset, opts.Maximum),
 		atStart: true,
 		atEnd: false,
 	}
