@@ -26,14 +26,6 @@ func bitCount(maximum uint32) uint8 {
 	return r
 }
 
-func minOne(a uint32) uint32 {
-	var n uint32 = 1
-	if a > n {
-		n = a
-	}
-	return n
-}
-
 func min(a, b uint32) uint32 {
 	var k uint32 = math.MaxUint32
 	if a < k {
@@ -55,7 +47,6 @@ func wrappingMod(outOffset int, max uint32) uint32 {
 	return uint32(offset)
 }
 
-// TODO: check that this does never return zeros
 func offset(cur, offset, maximum uint32) uint32 {
 	k := cur + offset
 	if k > maximum {
