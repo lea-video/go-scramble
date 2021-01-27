@@ -12,5 +12,5 @@ jobs:
       - name: Use golang
         uses: actions/setup-go@v2
 
-      - run: go test .\scrambler -race -coverprofile=coverage.txt -covermode=atomic
+      - run: go test ./scrambler -race -coverprofile=coverage.txt -covermode=atomic
       - run: bash <(curl -s https://codecov.io/bash)
