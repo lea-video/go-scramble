@@ -11,11 +11,13 @@ var feedbackMasks = [...]uint32 {
 	0x12BA74D, 0x36CD5A7, 0x4E5D793, 0xF5CDE95, 0x1A4E6FF2, 0x29D1E9EB, 0x7A5BC2E3, 0xB4BCD35C,
 }
 func getMask(highestBitPos uint8) uint32 {
+	if highestBitPos < 2 || highestBitPos > 32 {
+		return 0;
+	}
 	return feedbackMasks[highestBitPos - 2]
 }
 
 func bitCount(maximum uint32) uint8 {
-	println("bitCount", maximum)
 	var r uint8 = 0
 	for maximum != 0 {
 		maximum >>= 1
