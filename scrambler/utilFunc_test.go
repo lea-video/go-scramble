@@ -60,7 +60,11 @@ func TestScramble_bitCount(t *testing.T) {
 func TestScrambler_min(t *testing.T) {
 	m := min(4, 10)
 	if m != 4 {
-		t.Error("Expected lower with 2 values")
+		t.Error("Expected lower 2 work with first value")
+	}
+	m = min(10, 4)
+	if m != 4 {
+		t.Error("Expected lower 2 work with second value")
 	}
 	m = min(4, 4)
 	if m != 4 {
