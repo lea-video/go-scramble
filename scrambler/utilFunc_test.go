@@ -1,6 +1,7 @@
 package scrambler
 
 import (
+	"math"
 	"strconv"
 	"testing"
 )
@@ -57,11 +58,41 @@ func TestScramble_bitCount(t *testing.T) {
 }
 
 func TestScrambler_min(t *testing.T) {
-	// TODO: implement
+	m := min(4, 10)
+	if m != 4 {
+		t.Error("Expected lower with 2 values")
+	}
+	m = min(4, 4)
+	if m != 4 {
+		t.Error("Expected 4 with two equal values")
+	}
+	m = min(math.MaxUint32, math.MaxUint32)
+	if m != math.MaxUint32 {
+		t.Error("Fails for max value")
+	}
+	m = min(0, 10)
+	if m != 0 {
+		t.Error("Works with null")
+	}
 }
 
 func TestScrambler_wrappingMod(t *testing.T) {
-	// TODO: implement
+	m := wrappingMod(4, 6)
+	if m != 4 {
+		t.Error("did fail to not-wrap")
+	}
+	m = wrappingMod(4, 3)
+	if m != 1 {
+		t.Error("does wrap under normal conditions")
+	}
+	m = wrappingMod(-1, 3)
+	if m != 2 {
+		t.Error("does wrap negative to positive")
+	}
+	m = wrappingMod(-5, 3)
+	if m != 1 {
+		t.Error("does mod negative and wrap to positive")
+	}
 }
 
 func TestScrambler_offset(t *testing.T) {
@@ -87,9 +118,23 @@ func TestScrambler_offset(t *testing.T) {
 }
 
 func TestScrambler_shiftForward(t *testing.T) {
-	// TODO: implement
+	m := shiftForward(4, 0xff)
+	if m != 2 {
+		t.Error("failed with shifting for last-digit 0")
+	}
+	m = shiftForward(31, 0xff)
+	if m != 0xff - (31>>1) {
+		t.Error("failed with shifting+mask for last-digit 1")
+	}
 }
 
 func TestScrambler_shiftBackward(t *testing.T) {
-	// TODO: implement
+	m := shiftBackward(15, 0xff,16)
+	if m != 15<<1 {
+		t.Error("failed for only shifting")
+	}
+	m = shiftBackward(16, 0xff,16)
+	if m != 0x1fe - (16 << 1) + 1 {
+		t.Error("failed with shifting+mask")
+	}
 }
